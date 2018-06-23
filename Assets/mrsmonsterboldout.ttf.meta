@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 16a7fc0c4d55c9e418899b1a826f0c44
+timeCreated: 1529527350
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Mrs. Monster Bold Outline
+  fontNames:
+  - Mrs. Monster Bold Outline
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

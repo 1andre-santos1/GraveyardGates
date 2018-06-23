@@ -1,3 +1,7 @@
+#include <SoftwareSerial.h> //Software Serial Port
+#define RxD 14
+#define TxD 15
+
 const int troll_Pin = 23;
 const int zombieQuick_Pin = 24;
 const int zombieNormal_Pin = 27;
@@ -25,8 +29,13 @@ int xDefault_RangeMax = 600;
 int yDefault_RangeMin = 400;
 int yDefault_RangeMax = 600;
 
+SoftwareSerial blueToothSerial(RxD,TxD);
+
 void setup() {
   Serial.begin(9600);
+  blueToothSerial.begin(10000);
+  pinMode(RxD, INPUT);
+  pinMode(TxD, OUTPUT);
   pinMode(troll_Pin,INPUT_PULLUP);
   pinMode(zombieQuick_Pin,INPUT_PULLUP);
   pinMode(zombieNormal_Pin,INPUT_PULLUP);
@@ -35,9 +44,37 @@ void setup() {
   pinMode(bossMeteor_pin,INPUT_PULLUP);
   pinMode(SW_pin, INPUT);
   digitalWrite(SW_pin, HIGH);
+ /* blueToothSerial.print("\r\n+STWMOD=0\r\n"); 
+  blueToothSerial.print("\r\n+STPIN=0000\r\n");//Set SLAVE pincode"0000"
+  blueToothSerial.print("\r\n+STOAUT=1\r\n"); //Permit Paired device to connect me
+  blueToothSerial.print("\r\n+INQ=1\r\n"); */
+  blueToothSerial.flush();
 }
 
+String str10 = "Nivel 1\n";
+String str11 = "Cooldown:4s\n";
+String str12 = "Z Normal: v=100,s=2\n";
+String str13 = "Q Zombie: v=50,s=4\n";
+String str14 = "Troll: v=150,s=1\n";
+String str15 = "Boss: v=300,s=200";
+
+String str20 = "Nivel 2\n";
+String str21 = "Cooldown Time:2s\n";
+String str22 = "Zombie Normal: v=100,s=2\n";
+String str23 = "Quick Zombie: v=50,s=4\n";
+String str24 = "Troll: v=150,s=1\n";
+String str25 = "Boss: v=300,s=200";
+
+String str30 = "Nivel 3\n";
+String str31 = "Cooldown Time:1s\n";
+String str32 = "Zombie Normal: v=100,s=2\n";
+String str33 = "Quick Zombie: v=50,s=4\n";
+String str34 = "Troll: v=150,s=1\n";
+String str35 = "Boss: v=300,s=200";
+
+int canWrite = 0;
 void loop() {
+
   // read the state of the pushbutton value:
   troll_State = digitalRead(troll_Pin);
   zombieQuick_State = digitalRead(zombieQuick_Pin);
@@ -48,6 +85,63 @@ void loop() {
   bossMelee_State = digitalRead(bossMelee_pin);
   bossMinion_State = digitalRead(bossMinion_pin);
   bossMeteor_State = digitalRead(bossMeteor_pin);
+
+  char recvChar;
+
+  if(Serial.available()){ //check if there's any data sent from the remote BT shield
+   recvChar = Serial.read();
+   Serial.flush();
+   canWrite = recvChar - '0';
+   }
+
+   if(canWrite == 1)
+   {
+       blueToothSerial.print(str10);
+       delay(1000);
+       blueToothSerial.print(str11);
+       delay(1000);
+       blueToothSerial.print(str12);
+       delay(1000);
+       blueToothSerial.print(str13);
+       delay(1000);
+       blueToothSerial.print(str14);
+       delay(1000);
+       blueToothSerial.print(str15);
+
+      canWrite = 0;
+   }
+   else if(canWrite == 2)
+   {
+       blueToothSerial.print(str20);
+       delay(1000);
+       blueToothSerial.print(str21);
+       delay(1000);
+       blueToothSerial.print(str22);
+       delay(1000);
+       blueToothSerial.print(str23);
+       delay(1000);
+       blueToothSerial.print(str24);
+       delay(1000);
+       blueToothSerial.print(str25);
+
+      canWrite = 0;
+   }
+   else if(canWrite >= 3)
+   {
+       blueToothSerial.print(str30);
+       delay(1000);
+       blueToothSerial.print(str31);
+       delay(1000);
+       blueToothSerial.print(str32);
+       delay(1000);
+       blueToothSerial.print(str33);
+       delay(1000);
+       blueToothSerial.print(str34);
+       delay(1000);
+       blueToothSerial.print(str35);
+
+      canWrite = 0;
+   }
 
   if (troll_State == LOW) {
     Serial.write("3");
@@ -84,18 +178,5 @@ void loop() {
     Serial.write("4");
   }
 
-  //Serial.println(digitalRead(40));
-
-  /*Serial.print("Switch:  ");
-  Serial.print(digitalRead(SW_pin));
-  Serial.print("\n");
-  Serial.print("X-axis: ");
-  Serial.print(analogRead(X_pin));
-  Serial.print("\n");
-  Serial.print("Y-axis: ");
-  Serial.println(analogRead(Y_pin));
-  Serial.print("\n\n");
-  delay(2000);*/
-  
   delay(debounceDelay);
 }

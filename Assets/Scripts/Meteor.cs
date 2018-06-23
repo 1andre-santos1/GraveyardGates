@@ -16,7 +16,14 @@ public class Meteor : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<Boss>() != null)
+            {
+                collision.gameObject.GetComponent<Enemy>().health /= 2;
+                collision.gameObject.GetComponent<Enemy>().healthBar.localScale = new Vector3((collision.gameObject.GetComponent<Enemy>().health * 25f) / 150, collision.gameObject.GetComponent<Enemy>().healthBar.localScale.y);
+
+            }
+            else
+                Destroy(collision.gameObject);
             Explode();
         }
         if (collision.gameObject.tag == "Player")

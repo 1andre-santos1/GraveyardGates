@@ -1,0 +1,172 @@
+{
+  "upgrades": [
+    {
+      "cost": "50",
+      "type": "ammo",
+      "description": "+3 Total Ammo",
+      "gun": "pistol",
+      "amount": "3",
+      "percentage": "n"
+    },
+    {
+      "cost": "80",
+      "type": "reloadTime",
+      "description": "-5% Reload Time",
+      "gun": "pistol",
+      "amount": "5",
+      "percentage": "y"
+    },
+    {
+      "cost": "80",
+      "type": "fireTime",
+      "description": "-5% Fire Time",
+      "gun": "pistol",
+      "amount": "5",
+      "percentage": "y"
+    },
+    {
+      "cost": "100",
+      "type": "ammo",
+      "description": "+5 Total Ammo",
+      "gun": "pistol",
+      "amount": "5",
+      "percentage": "n"
+    },
+    {
+      "cost": "120",
+      "type": "reloadTime",
+      "description": "-8% Reload Time",
+      "gun": "pistol",
+      "amount": "8",
+      "percentage": "y"
+    },
+    {
+      "cost": "120",
+      "type": "fireTime",
+      "description": "-8% Fire Time",
+      "gun": "pistol",
+      "amount": "8",
+      "percentage": "y"
+    },
+    {
+      "cost": "150",
+      "type": "ammo",
+      "description": "+8 Total Ammo",
+      "gun": "pistol",
+      "amount": "8",
+      "percentage": "n"
+    },
+    {
+      "cost": "180",
+      "type": "reloadTime",
+      "description": "-10% Reload Time",
+      "gun": "pistol",
+      "amount": "10",
+      "percentage": "y"
+    },
+    {
+      "cost": "180",
+      "type": "fireTime",
+      "description": "-10% Fire Time",
+      "gun": "pistol",
+      "amount": "10",
+      "percentage": "y"
+    },
+    {
+      "cost": "200",
+      "type": "ammo",
+      "description": "+5 Total Ammo",
+      "gun": "pistol",
+      "amount": "5",
+      "percentage": "n"
+    },
+    {
+      "cost": "250",
+      "type": "reloadTime",
+      "description": "-15% Reload Time",
+      "gun": "pistol",
+      "amount": "25",
+      "percentage": "y"
+    },
+    {
+      "cost": "250",
+      "type": "fireTime",
+      "description": "-15% Fire Time",
+      "gun": "pistol",
+      "amount": "25",
+      "percentage": "y"
+    },
+    {
+      "cost": "250",
+      "type": "ammo",
+      "description": "+3 Total Ammo",
+      "gun": "shotgun",
+      "amount": "3",
+      "percentage": "n"
+    },
+    {
+      "cost": "250",
+      "type": "reloadTime",
+      "description": "-5% Reload Time",
+      "gun": "shotgun",
+      "amount": "5",
+      "percentage": "y"
+    },
+    {
+      "cost": "250",
+      "type": "fireTime",
+      "description": "-5% Fire Time",
+      "gun": "shotgun",
+      "amount": "5",
+      "percentage": "y"
+    },
+    {
+      "cost": "300",
+      "type": "ammo",
+      "description": "+5 Total Ammo",
+      "gun": "shotgun",
+      "amount": "5",
+      "percentage": "n"
+    },
+    {
+      "cost": "300",
+      "type": "reloadTime",
+      "description": "-10% Reload Time",
+      "gun": "shotgun",
+      "amount": "10",
+      "percentage": "y"
+    },
+    {
+      "cost": "300",
+      "type": "fireTime",
+      "description": "-10% Fire Time",
+      "gun": "shotgun",
+      "amount": "10",
+      "percentage": "y"
+    },
+    {
+      "cost": "350",
+      "type": "ammo",
+      "description": "+10 Total Ammo",
+      "gun": "shotgun",
+      "amount": "10",
+      "percentage": "n"
+    },
+    {
+      "cost": "350",
+      "type": "reloadTime",
+      "description": "-15% Reload Time",
+      "gun": "shotgun",
+      "amount": "15",
+      "percentage": "y"
+    },
+    {
+      "cost": "350",
+      "type": "fireTime",
+      "description": "-15% Fire Time",
+      "gun": "shotgun",
+      "amount": "15",
+      "percentage": "y"
+    }
+  ] 
+}

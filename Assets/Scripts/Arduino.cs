@@ -97,26 +97,21 @@ public class Arduino : MonoBehaviour
 
             keyPressed = 0;
         }
-        else if (Input.GetKeyUp(KeyCode.Alpha4) && canSpawn)
+        else if (Input.GetKeyUp(KeyCode.Alpha4) && canSpawn  || keyPressed == 5 && canSpawn)
         {
             enemySpawner.SpawnHole(SpawningLight.transform.position.x);
             canSpawn = false;
             StartCoroutine("CooldownSpawn");
         }
 
-        else if (Input.GetKeyUp(KeyCode.Alpha5) && canSpawn)
+        else if (Input.GetKeyUp(KeyCode.Alpha5) && canSpawn || keyPressed == 6 && canSpawn)
         {
             enemySpawner.SpawnBomb(SpawningLight.transform.position.x);
             canSpawn = false;
             StartCoroutine("CooldownSpawn");
         }
 
-        else if (Input.GetKeyUp(KeyCode.Alpha6) && canSpawn)
-        {
-            enemySpawner.SpawnMeteors();
-            canSpawn = false;
-            StartCoroutine("CooldownSpawn");
-        }
+        
     }
 
     private IEnumerator CooldownSpawn()

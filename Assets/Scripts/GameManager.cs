@@ -7,14 +7,26 @@ public class GameManager : MonoBehaviour
     public bool BossActive = false;
     public bool IsGameActive = true;
 
-    private int seconds = 0;
+    public int seconds = 0;
 
     private UIManager uimanager;
+    private int levelIndex = 1;
+
 
     private void Start()
     {
         uimanager = GameObject.FindObjectOfType<UIManager>();
         StartCoroutine("UpdateTime");
+
+        StartCoroutine("Wait");
+        
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2f);
+        GameObject.FindObjectOfType<ArduinoController>().WriteToArduino(levelIndex);
+        levelIndex++;
     }
     public void EndLevel()
     {
@@ -41,6 +53,11 @@ public class GameManager : MonoBehaviour
         GameObject.FindObjectOfType<Player>().UpdateMoneyText();
         GameObject.FindObjectOfType<BossSpawner>().StartSpawningEvent();
         IsGameActive = true;
+        GameObject.FindObjectOfType<ArduinoController>().WriteToArduino(levelIndex);
+        levelIndex++;
+        GameObject.FindObjectOfType<Arduino>().CooldownTime /= 2;
+        if (GameObject.FindObjectOfType<Arduino>().CooldownTime < 1)
+            GameObject.FindObjectOfType<Arduino>().CooldownTime = 1;
     }
 
     private IEnumerator UpdateTime()
@@ -52,8 +69,11 @@ public class GameManager : MonoBehaviour
         else
             uimanager.UpdateTime((seconds/60)+":0"+(seconds%60));
         yield return new WaitForSeconds(1f);
-        if(IsGameActive)
+        if (IsGameActive)
+        {
             seconds++;
+            GameObject.FindObjectOfType<Player>().Points+=1;
+        }
         StartCoroutine("UpdateTime");
     }
 }

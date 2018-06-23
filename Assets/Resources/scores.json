@@ -1,0 +1,34 @@
+{
+"scores":[
+{
+    "name": "BARROS",
+    "seconds": 600,
+    "kills": "234",
+    "points": "2001"
+},
+{
+    "name": "DAVID",
+    "seconds": 480,
+    "kills": "197",
+    "points": "1970"
+},
+{
+    "name": "DIOGO",
+    "seconds": 360,
+    "kills": "168",
+    "points": "1750"
+},
+{
+    "name": "ANDRE",
+    "seconds": 240,
+    "kills": "123",
+    "points": "1356"
+},
+{
+    "name": "???",
+    "seconds": 223,
+    "kills": "61",
+    "points": "623"
+}
+]
+}

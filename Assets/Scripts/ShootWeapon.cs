@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class ShootWeapon : MonoBehaviour
@@ -75,10 +76,10 @@ public class ShootWeapon : MonoBehaviour
         isShooting = true;
 
         if (currentWeapon == 0)
-            GetComponent<AudioSource>().clip = PistolShot;
+            gameObject.transform.GetChild(0).gameObject.GetComponent<AudioSource>().clip = PistolShot;
         else if(currentWeapon == 1)
-            GetComponent<AudioSource>().clip = ShotgunShot;
-        GetComponent<AudioSource>().Play();
+            gameObject.transform.GetChild(0).gameObject.GetComponent<AudioSource>().clip = ShotgunShot;
+        gameObject.transform.GetChild(0).gameObject.GetComponent<AudioSource>().Play();
 
         //Spawn the GunFire particle on the GunOrigin position
         SpawnParticle(GunFire,GunOrigin.transform.position);
@@ -115,8 +116,8 @@ public class ShootWeapon : MonoBehaviour
     private void Reload()
     {
         isReloading = true;
-        GetComponent<AudioSource>().clip = ReloadSound;
-        GetComponent<AudioSource>().Play();
+        gameObject.transform.GetChild(0).gameObject.GetComponent<AudioSource>().clip = ReloadSound;
+        gameObject.transform.GetChild(0).gameObject.GetComponent<AudioSource>().Play();
         Debug.Log("Is Reloading");
         if(currentWeapon == 0)
             StartCoroutine("CooldownPistolReloadTime");
@@ -210,51 +211,87 @@ public class ShootWeapon : MonoBehaviour
             weapons.Add(index);
             gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - 400);
             GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
         }
     }
 
-    public void UpgradePistol_ReloadTime(int buyIndex)
+    public bool UpgradePistol_ReloadTime(int cost,float amount)
     {
-        switch (buyIndex)
+        if (gameObject.GetComponent<Player>().GetMoney() >= cost)
         {
-            case 1:
-                if (gameObject.GetComponent<Player>().GetMoney() >= 100)
-                {
-                    PistolReloadTime -= (PistolReloadTime * 0.1f);
-                    gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - 100);
-                    GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
-                }
-                    
-                break;
+            PistolReloadTime -= amount;
+            gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - cost);
+            GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
+            return true;
         }
+
+        return false;
     }
-    public void UpgradePistol_FireTime(int buyIndex)
+    public bool UpgradePistol_FireTime(int cost,float amount)
     {
-        switch (buyIndex)
+        if (gameObject.GetComponent<Player>().GetMoney() >= cost)
         {
-            case 1:
-                if (gameObject.GetComponent<Player>().GetMoney() >= 100)
-                {
-                    PistolFireTime -= (PistolFireTime * 0.1f);
-                    gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - 100);
-                    GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
-                }
-                    
-                break;
+            PistolFireTime -= amount;
+            gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - cost);
+            GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
+            return true;
         }
+
+        return false;
     }
-    public void UpgradePistol_TotalAmmo(int buyIndex)
+    public bool UpgradePistol_TotalAmmo(int cost, int amount)
     {
-        switch (buyIndex)
+        if (gameObject.GetComponent<Player>().GetMoney() >= cost)
         {
-            case 1:
-                if (gameObject.GetComponent<Player>().GetMoney() >= 120)
-                {
-                    PistolTotalAmmo += 10;
-                    gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - 120);
-                    GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
-                }
-                break;
+            PistolTotalAmmo += amount;
+            gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - cost);
+            GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
+            return true;
         }
+
+        return false;
+    }
+
+    public bool UpgradeShotgun_ReloadTime(int cost, float amount)
+    {
+        if (gameObject.GetComponent<Player>().GetMoney() >= cost && weapons.Contains(1))
+        {
+            ShotgunReloadTime -= amount;
+            gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - cost);
+            GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
+            return true;
+        }
+
+        return false;
+    }
+    public bool UpgradeShotgun_FireTime(int cost, float amount)
+    {
+        if (gameObject.GetComponent<Player>().GetMoney() >= cost && weapons.Contains(1))
+        {
+            ShotgunFireTime -= amount;
+            gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - cost);
+            GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
+            return true;
+        }
+
+        return false;
+    }
+    public bool UpgradeShotgun_TotalAmmo(int cost, int amount)
+    {
+        if (gameObject.GetComponent<Player>().GetMoney() >= cost && weapons.Contains(1))
+        {
+            ShotgunTotalAmmo += amount;
+            gameObject.GetComponent<Player>().SetMoney(gameObject.GetComponent<Player>().GetMoney() - cost);
+            GameObject.FindObjectOfType<UIManager>().UpdateNumberOfCoins();
+            GameObject.FindObjectOfType<UIManager>().PlayButtonSound();
+            return true;
+        }
+
+        return false;
     }
 }

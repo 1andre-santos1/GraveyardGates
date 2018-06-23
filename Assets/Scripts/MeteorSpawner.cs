@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MeteorSpawner : MonoBehaviour
 {
-    public int MaxNumberOfMeteors = 5;
+    public int MaxNumberOfMeteors = 8;
+    public int MinNumberOfMeteors = 3;
 
     public GameObject Meteor;
 
@@ -18,7 +19,7 @@ public class MeteorSpawner : MonoBehaviour
         float minX = minPos.x;
         float maxX = maxPos.x;
 
-        int numMeteors = Random.Range(0, MaxNumberOfMeteors + 1);
+        int numMeteors = Random.Range(MinNumberOfMeteors, MaxNumberOfMeteors + 1);
         for (int i = 0; i < numMeteors; i++)
         {
             Instantiate(Meteor, new Vector3(Random.Range(minX, maxX), transform.position.y,Meteor.transform.position.z), Quaternion.identity);

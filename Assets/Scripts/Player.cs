@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     private int extraHealth = 0;
     public int money = 0;
 
+    public int ZombiesKilled = 0;
+    public int Points = 0;
+
     public int Health
     {
         get
@@ -41,8 +44,8 @@ public class Player : MonoBehaviour
             health = value;
             if (health <= 0)
             {
-                Destroy(gameObject);
                 GameObject.FindObjectOfType<GameManager>().PlayerDies();
+                Destroy(gameObject);
             }
         }
     }

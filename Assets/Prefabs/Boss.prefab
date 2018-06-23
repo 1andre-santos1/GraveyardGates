@@ -214,6 +214,7 @@ MonoBehaviour:
   SoundAppearence: {fileID: 0}
   SoundHurt: {fileID: 0}
   SoundDie: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &114981491573973584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,6 +226,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9129242198c39146be51a1ff9a99a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Minions:
+  - {fileID: 1818911365253120, guid: 85aeff5031414384ca824e59b4c29c20, type: 2}
+  - {fileID: 1818911365253120, guid: 05ccf55226640cb489e956df41ade94d, type: 2}
+  - {fileID: 1818911365253120, guid: f5d018672beb4d6419cc192f059d1f16, type: 2}
+  NumberOfMinions: 3
+  MinionsDelay: 5
+  MeteorDelay: 10
 --- !u!212 &212124359872208578
 SpriteRenderer:
   m_ObjectHideFlags: 1

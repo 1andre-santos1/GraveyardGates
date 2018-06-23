@@ -35,4 +35,20 @@ public class ArduinoController : MonoBehaviour
     {
         GetComponent<Arduino>().SetKeyPressed(keyIndex);
     }
+
+    public void WriteToArduino(int index)
+    {
+        if (sp.IsOpen)
+        {
+            try
+            {
+                sp.Write(index+"");
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+    }
+
 }

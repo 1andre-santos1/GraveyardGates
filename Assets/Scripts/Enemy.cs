@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     private bool isDying;
     private bool isAlreadyAttacking;
     private bool isCollidingWithPlayer = false;
-    private Transform healthBar;
+    public Transform healthBar;
 
     private bool isBoss = false;
 
@@ -97,6 +97,12 @@ public class Enemy : MonoBehaviour
             gameObject.transform.GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder - 1;
             gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+
+            GameObject.FindObjectOfType<Player>().ZombiesKilled++;
+            if(gameObject.GetComponent<Boss>() == null)
+                GameObject.FindObjectOfType<Player>().Points+=5;
+            else
+                GameObject.FindObjectOfType<Player>().Points += 100;
 
             StartCoroutine("DestroyObject");
 
